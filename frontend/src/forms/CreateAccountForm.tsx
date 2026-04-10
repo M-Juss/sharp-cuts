@@ -6,7 +6,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import {
   CreateAccountFormValues,
   createAccountSchema
-} from '../validations/auth.schema';
+} from '../validations/auth.validation';
 import { Button } from '../components/ui/button';
 import { createNewClient } from '@/services/auth.api';
 import { useRouter } from 'next/navigation';

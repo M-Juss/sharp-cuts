@@ -1,0 +1,41 @@
+import {NewBookingForm} from '@/forms/NewBookingForm';
+
+import {
+  LayoutDashboard,
+  Clock,
+  ClipboardClock,
+  MapPin,
+  BadgeCheck,
+  Scissors
+} from 'lucide-react';
+
+export function NewBookings({setActiveTab}) {
+  return (
+    <div className="lg:col-span-3 cols-span-1 flex flex-col w-full">
+      <div className="flex items-center justify-between mb-4">
+        <h1 className="text-3xl font-semibold">New Booking</h1>
+        <button
+          onClick={() => setActiveTab('bookings')}
+          className="bg-zinc-600 text-white px-4 py-2 rounded-md flex items-center gap-2 cursor-pointer"
+        >
+          {' '}
+          <LayoutDashboard size={15} /> Back to Dashboard
+        </button>
+      </div>
+
+      <div className="flex flex-col bg-white rounded-xl shadow-md border border-gray-200 p-8 mb-4">
+        <div className="flex space-x-3 mb-2 ">
+          <p className="bg-client p-1 my-auto rounded-md text-white">
+            <Scissors size={35} />
+          </p>
+          <div className="flex flex-col">
+            <p className="text-xl font-semibold">Book your Appointment</p>
+            <p>Fill in the details below</p>
+          </div>
+        </div>
+
+        <NewBookingForm />
+      </div>
+    </div>
+  );
+}

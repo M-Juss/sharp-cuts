@@ -5,7 +5,7 @@ import {Button} from '../components/ui/button';
 import {
   loginSchema,
   type LoginFormValues
-} from '@/validations/auth.schema';
+} from '@/validations/auth.validation';
 import {zodResolver} from '@hookform/resolvers/zod';
 import {loginRequest} from '@/services/auth.api';
 import {useRouter} from 'next/navigation';
