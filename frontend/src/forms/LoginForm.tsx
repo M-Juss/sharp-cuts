@@ -27,11 +27,11 @@ export function LoginForm() {
       const response = await loginRequest(data.email, data.password);
       console.log('Log in data:', response);
 
-      if (response.data?.user.user_type === 'client') {
-        router.push('/clients');
-      } else if (response.data?.user.user_type === 'admin') {
+      if (response.data?.user_type === 'client') {
+        router.push('/client');
+      } else if (response.data?.user_type === 'admin') {
         router.push('/admin');
-      } else if (response.data?.user.user_type === 'manager') {
+      } else if (response.data?.user_type === 'manager') {
         router.push('/manager');
       }  else {
         alert('Unknown user type');

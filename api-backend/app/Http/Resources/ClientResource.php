@@ -20,6 +20,7 @@ class ClientResource extends JsonResource
             "first_name"=> $this->first_name,
             "last_name"=> $this->last_name,
             "contact_number"=> $this->contact_number,
+            "created_at" => $this->created_at,
             "user" => new UserResource($this->whenLoaded('user'))
         ];
     }

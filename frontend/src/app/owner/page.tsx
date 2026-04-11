@@ -5,7 +5,7 @@ import {useState} from 'react';
 import {BranchCard} from '@/components/common/BranchCard';
 import {Overview} from '@/layout/owner/Overview';
 
-export default function OwnerDashboard() {
+export default function OwnerPage() {
   const [activeTab, setActiveTab] = useState<
     'overview' | 'branches' | 'logout'
   >('overview');

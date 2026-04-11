@@ -19,26 +19,25 @@ export async function loginRequest(email: string, password: string): Promise<Api
     throw err;
   }
 
-  localStorage.setItem('authorization', data.data?.token);
-  localStorage.setItem('user', JSON.stringify(data.data?.user.user_type));
+  localStorage.setItem('authorization', `Bearer ${data.data?.token}`);
 
   return data;
 }
 
 export async function createNewClient(
+  first_name: string,
+  last_name: string,
   email: string,
-  password: string,
   contact_number: string,
-  full_name: string,
-  user_type: string
+  password: string,
 ): Promise<ApiResponse> {
-  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/register`, {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/client`, {
     method: 'POST',
     headers: {
-      Accept: 'application/json',
+      'Accept': 'application/json',
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ email, password, contact_number, full_name, user_type })
+    body: JSON.stringify({ email, password, contact_number, first_name, last_name })
   });
 
   const data:  ApiResponse = await response.json();

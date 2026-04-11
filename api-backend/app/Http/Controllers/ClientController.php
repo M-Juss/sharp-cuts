@@ -41,11 +41,11 @@ class ClientController extends Controller
         }
     }
 
-    public function show(Client $client)
+    public function show()
     {
-        abort_if(Auth::id() != $client->user_id, 403, 'Access Forbidden');
+        $client = Auth::user()?->client?->load('user');
 
-        return $this->success('Success showing client info.', new ClientResource($client->load('user')));
+        return $this->success('Success showing client info.', new ClientResource($client));
     }
 
     public function update(ClientRequest $request, Client $client)

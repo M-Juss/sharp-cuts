@@ -10,7 +10,7 @@ import {Clients} from '@/layout/partner/Clients';
 import {Admins} from '@/layout/partner/Admins';
 import {BranchManagerTab} from '@/types/app.types';
 
-export default function BranchManagerDashboard() {
+export default function PartnerLPage() {
   const [activeTab, setActiveTab] = useState<BranchManagerTab>('admins');
 
   const adminData = [

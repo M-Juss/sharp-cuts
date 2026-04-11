@@ -10,7 +10,7 @@ import {useState} from 'react';
 import {Overview} from '@/layout/client/Overview';
 import {Bookings} from '@/layout/client/Bookings';
 
-export default function BranchAdminDashboard() {
+export default function AdminPage() {
   const [activeTab, setActiveTab] = useState<
     'overview' | 'bookings' | 'logout'
   >('bookings');

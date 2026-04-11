@@ -6,9 +6,14 @@ import {
   editClientSchema,
 } from '@/validations/edit.client.validation';
 import { Pencil } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { ClientProfile } from '@/types/app.types';
 
-export function EditClientProfileForm() {
+interface EditClientProfileFormProps {
+  profile: ClientProfile | null;
+}
+
+export function EditClientProfileForm({ profile }: EditClientProfileFormProps) {
   const [isEditing, setIsEditing] = useState(false);
   const [snapshotValues, setSnapshotValues] =
     useState<EditClientFormValues | null>(null);
@@ -29,9 +34,19 @@ export function EditClientProfileForm() {
     },
   });
 
+  useEffect(() => {
+    if (profile) {
+      reset({
+        first_name: profile.first_name,
+        last_name: profile.last_name,
+        email: profile.user.email,
+        contact_number: profile.contact_number,
+      });
+    }
+  }, [profile, reset]);
+
   const onSubmit = async (data: EditClientFormValues) => {
     if (!isEditing) return;
-
     console.log(data);
     setSnapshotValues(data);
     setIsEditing(false);
@@ -54,7 +69,6 @@ export function EditClientProfileForm() {
       onSubmit={handleSubmit(onSubmit)}
       className="flex flex-col bg-white rounded-xl shadow-md border border-gray-200 px-4 py-6 space-y-4 mb-4"
     >
-      {/* First Name */}
       <div>
         <InputWithLabel
           label="Firstname"
@@ -70,7 +84,6 @@ export function EditClientProfileForm() {
         )}
       </div>
 
-      {/* Last Name */}
       <div>
         <InputWithLabel
           label="Lastname"
@@ -86,7 +99,6 @@ export function EditClientProfileForm() {
         )}
       </div>
 
-      {/* Email */}
       <div>
         <InputWithLabel
           label="Email Address"
@@ -96,13 +108,10 @@ export function EditClientProfileForm() {
           {...register('email')}
         />
         {errors.email && (
-          <p className="text-red-500 text-sm mt-1">
-            {errors.email.message}
-          </p>
+          <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>
         )}
       </div>
 
-      {/* Contact Number */}
       <div>
         <InputWithLabel
           label="Contact Number"
@@ -118,11 +127,19 @@ export function EditClientProfileForm() {
         )}
       </div>
 
-      {/* Member Since */}
       <InputWithLabel
         label="Member Since"
         id="member_since"
         type="text"
+        value={
+          profile
+            ? new Date(profile.created_at).toLocaleDateString('en-PH', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+              })
+            : ''
+        }
         disabled
       />
 

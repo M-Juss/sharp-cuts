@@ -13,7 +13,7 @@ import {Profile} from '@/layout/client/Profile';
 import {Bookings} from '@/layout/client/Bookings';
 import { NewBookings } from '@/layout/client/NewBookings';
 
-export default function ClientPage(params: {clientId: string}) {
+export default function ClientPage() {
   const [activeTab, setActiveTab] = useState<ClientTab>('overview');
 
   return (

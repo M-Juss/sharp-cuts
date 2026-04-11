@@ -12,7 +12,11 @@ class LoginController extends Controller
         $request->authenticate();
         $user = $request->user();
         $token = $user->createToken('auth_token')->plainTextToken;
+        $data = [
+            'user_type' => $user->user_type,
+            'token' => $token
+        ];
         
-        return $this->success("Login Successful!", $token);
+        return $this->success("Login Successful!", $data);
     }
 }

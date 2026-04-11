@@ -62,9 +62,26 @@ export type BranchManagerTab =
   | "services"
   | "logout";
 
-  export interface ApiResponse<T = null> {
+export interface ApiResponse<T = null> {
   success: boolean;
   message: string;
-  data?: T;
-  errors?: Record<string, string[]>;
+  data: T;
+  errors?: Record<string, string[]> | null;
+}
+
+
+export interface ClientProfile {
+  id: number;
+  user_id: number;
+  first_name: string;
+  last_name: string;
+  contact_number: string;
+  created_at: string;
+  user: ClientUser;
+}
+
+export interface ClientUser {
+  id: number;
+  email: string;
+  user_type: string;
 }

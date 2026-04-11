@@ -11,7 +11,7 @@ import {Calendar} from 'lucide-react';
 import {Clock} from 'lucide-react';
 import {IdCardLanyard} from 'lucide-react';
 
-export function NewBookingForm() {
+export function NewBookingForm( ) {
   return (
     <div>
       <form className="flex flex-col w-full space-y-5">

@@ -17,28 +17,25 @@ export function CreateAccountForm() {
  const {
     register,
     handleSubmit,
-    setError,           // ← add this
+    setError,           
     formState: { errors, isSubmitting }
   } = useForm<CreateAccountFormValues>({
     resolver: zodResolver(createAccountSchema)
   });
 
   const onSubmit = async (data: CreateAccountFormValues) => {
-    const full_name = `${data.first_name} ${data.last_name}`;
     try {
-      await createNewClient(data.email, data.password, data.contact_number, full_name, 'client');
+      await createNewClient(data.first_name, data.last_name, data.email, data.contact_number, data.password);
       router.push('/login');
     } catch (error: any) {
-      // Map Laravel field errors back into the form
       if (error.errors) {
         Object.entries(error.errors).forEach(([field, messages]) => {
           setError(field as keyof CreateAccountFormValues, {
             type: 'server',
-            message: (messages as string[])[0]  // first message per field
+            message: (messages as string[])[0]  
           });
         });
       } else {
-        // Non-field error (e.g. server crash) — set on a root error
         setError('root', { type: 'server', message: error.message });
       }
     }
