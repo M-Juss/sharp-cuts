@@ -47,3 +47,5 @@ export const editClientPasswordSchema = z.object({
     path:["confirm_new_password"],
     message: "Password do not match",
 });
+
+export type EditClientPasswordFormValues = z.infer<typeof editClientPasswordSchema>

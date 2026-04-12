@@ -46,7 +46,7 @@ const [error, setError] = useState<string | null>(null);
           </div>
         </div>
 
-        <NewBookingForm  />
+        <NewBookingForm profile={profile} />
 
       </div>
     </div>

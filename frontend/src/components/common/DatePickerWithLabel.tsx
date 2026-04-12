@@ -16,18 +16,48 @@ import { addMonths, startOfDay } from "date-fns"
 const today = startOfDay(new Date())
 const oneMonthLater = addMonths(today, 1)
 
+interface DateTimePickerLabelProps {
+  id?: string
+  label: string
+  icon?: React.ReactNode
+  value?: Date
+  defaultValue?: Date
+  onChange?: (date: Date | undefined) => void
+  placeholder?: string
+}
 
-export function DateTimePickerLabel( {label, icon} ) {
-  const [date, setDate] = React.useState<Date>()
+export function DateTimePickerLabel({
+  id,
+  label,
+  icon,
+  value,
+  defaultValue,
+  onChange,
+  placeholder = "Pick a date",
+}: DateTimePickerLabelProps) {
+  const [internalDate, setInternalDate] = React.useState<Date | undefined>(
+    defaultValue
+  )
+
+  const isControlled = typeof onChange === "function"
+  const selectedDate = isControlled ? value : internalDate
+
+  const handleSelect = (date: Date | undefined) => {
+    if (!isControlled) {
+      setInternalDate(date)
+    }
+    onChange?.(date)
+  }
 
   return (
     <div className="grid w-full gap-2">
-        <Label>{icon}{label}</Label>
+        <Label htmlFor={id}>{icon}{label}</Label>
         <Popover>
             <PopoverTrigger asChild>
             <Button
+                id={id}
                 variant="outline"
-                data-empty={!date}
+                data-empty={!selectedDate}
                 className="
                 w-full
                 py-6
@@ -50,7 +80,7 @@ export function DateTimePickerLabel( {label, icon} ) {
                 hover:bg-gray-50
                 "
             >
-            {date ? format(date, "PPP") : <span>Pick a date</span>}
+            {selectedDate ? format(selectedDate, "PPP") : <span>{placeholder}</span>}
             <ChevronDownIcon className="size-4 text-muted-foreground" />
         </Button>
         </PopoverTrigger>
@@ -68,8 +98,8 @@ export function DateTimePickerLabel( {label, icon} ) {
             >
             <Calendar
             mode="single"
-            selected={date}
-            onSelect={setDate}
+            selected={selectedDate}
+            onSelect={handleSelect}
             disabled={{ before: today, after: oneMonthLater }}
 
             />

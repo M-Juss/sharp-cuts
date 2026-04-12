@@ -1,13 +1,15 @@
 import { Scissors } from "lucide-react";
 import { InputWithLabel } from "../components/common/InputWithField";
 import { Button } from "../components/ui/button";
+import { DialogTitle } from "../components/ui/dialog";
 
 export function NewAdminForm({ onClose }: { onClose: () => void }) {
   return (
-    <div className="bg-zinc-900 border border-accent rounded-xl py-8 px-10 flex flex-col text-white shadow-2xl">
+    <div className="bg-zinc-900 border border-client rounded-xl py-8 px-10 flex flex-col text-white shadow-2xl">
+      <DialogTitle className="sr-only">Add Admin</DialogTitle>
       
-      <h1 className="text-xl flex items-center justify-center gap-3 border border-accent rounded-xl p-2 mb-6">
-        <Scissors size={30} className="bg-accent p-1 rounded-md" />
+      <h1 className="text-xl flex items-center justify-center gap-3 border border-client rounded-xl p-2 mb-6">
+        <Scissors size={30} className="bg-client p-1 rounded-md" />
         Add Admin
       </h1>
 
@@ -27,7 +29,7 @@ export function NewAdminForm({ onClose }: { onClose: () => void }) {
         <InputWithLabel label="Confirm Password" id="confirm_password" type="password" placeholder="Confirm Password" />
 
         <div className="flex gap-2">
-          <Button type="submit" className="w-full font-semibold bg-accent">
+          <Button type="submit" className="w-full font-semibold bg-client">
             Submit
           </Button>
         </div>

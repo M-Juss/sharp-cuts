@@ -17,13 +17,13 @@ export function Overview({setActiveTab}: OverviewProps) {
   return (
     <div className="flex flex-col w-full lg:col-span-3 sm:col-span-1 ">
       <h1 className="text-4xl font-semibold mb-2">Welcome back, John!</h1>
-      <p className="">Heres what's happening with your appointment</p>
+      <p className="">Heres what's happening with your booking</p>
 
       <div className="grid grid-cols-2 gap-4 my-4">
         <div className="flex flex-col p-4 bg-blue-500 text-white rounded-md space-y-3 ">
           <ClipboardClock size={45} />
           <p className="text-4xl font-semibold">5</p>
-          <p className="text-md">Upcoming Appointments</p>
+          <p className="text-md">Upcoming Booking</p>
         </div>
         <div className="flex flex-col p-4 bg-green-500 text-white rounded-md space-y-3 ">
           <CircleCheckBig size={45} />
@@ -33,7 +33,7 @@ export function Overview({setActiveTab}: OverviewProps) {
       </div>
 
       <div className="flex flex-col bg-white rounded-xl shadow-md border border-gray-200 p-4 ">
-        <h2 className="text-xl font-semibold mb-4">Next Appointment</h2>
+        <h2 className="text-xl font-semibold mb-4">Next Booking</h2>
 
         <div className=" flex flex-col p-4 bg-yellow-100 rounded-md border border-yellow-300 space-y-1 ">
           <div className="flex justify-between mb">
@@ -81,7 +81,7 @@ export function Overview({setActiveTab}: OverviewProps) {
               <Plus size={25} />
             </p>
             <p className="text-lg  flex flex-col font-semibold">
-              Book New Appointment{' '}
+              New Booking{' '}
               <span className="text-sm font-normal">
                 Schedule your next visit
               </span>

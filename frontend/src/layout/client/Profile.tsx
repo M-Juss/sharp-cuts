@@ -1,5 +1,10 @@
 import { EditClientProfileForm } from '@/forms/EditClientProfileForm';
-import { useClientProfile } from '@/hooks/useClientProfile';
+import { ChangePasswordForm } from '@/forms/ChangePasswordForm';
+import {
+  Dialog,
+  DialogContent,
+  DialogTrigger,
+} from '@/components/ui/dialog';
 import { getClientProfile } from '@/services/client.api';
 import { ClientProfile } from '@/types/app.types';
 import { useState, useEffect } from 'react';
@@ -9,6 +14,7 @@ export function Profile() {
 const [profile, setProfile] = useState<ClientProfile | null>(null);
 const [loading, setLoading] = useState(true);
 const [error, setError] = useState<string | null>(null);
+const [openChangePassword, setOpenChangePassword] = useState(false);
 
   useEffect(() => {
     getClientProfile()
@@ -57,7 +63,14 @@ const [error, setError] = useState<string | null>(null);
         </div>
 
         <div className="flex flex-col lg:flex-row sm:space-y-2 lg:space-y-0 lg:space-x-2 mt-2 text-white">
-          <button className="bg-client p-2 rounded-md">Change Password</button>
+          <Dialog open={openChangePassword} onOpenChange={setOpenChangePassword}>
+            <DialogTrigger asChild>
+              <button className="bg-client p-2 rounded-md">Change Password</button>
+            </DialogTrigger>
+            <DialogContent className="max-w-lg w-full p-0 bg-transparent border-none shadow-none backdrop-blur-md">
+              <ChangePasswordForm />
+            </DialogContent>
+          </Dialog>
           <button className="bg-red-500 p-2 rounded-md">Delete Account</button>
         </div>
       </div>
