@@ -2,8 +2,8 @@
 import {Scissors} from 'lucide-react';
 import {LayoutDashboard, Building2, LogOut} from 'lucide-react';
 import {useState} from 'react';
-import {BranchCard} from '@/components/common/BranchCard';
 import {Overview} from '@/layout/owner/Overview';
+import {Branches} from '@/layout/owner/Branches';
 
 export default function OwnerPage() {
   const [activeTab, setActiveTab] = useState<
@@ -35,6 +35,26 @@ export default function OwnerPage() {
       revenue: 7000,
       icon: <Building2 />
     }
+  ];
+
+  const branchCards = [
+    {
+      name: 'Downtown Branch',
+      address: '123 Barber Street, Downtown',
+      status: 'active' as const,
+      manager: {
+        name: 'Downtown Branch Manager',
+        email: 'manager@gmail.com',
+      },
+      stats: {
+        clients: 247,
+        bookings: 247,
+        revenue: 247,
+      },
+      onView: () => console.log('View'),
+      onEdit: () => console.log('Edit'),
+      onDelete: () => console.log('Delete'),
+    },
   ];
 
   return (
@@ -92,31 +112,7 @@ export default function OwnerPage() {
         {activeTab === 'overview' && (
           <Overview performances={branchPerformance} />
         )}
-        {activeTab === 'branches' && (
-          <div className="lg:col-span-3 col-span-1 flex flex-col">
-            <h1 className="text-4xl mb-1 font-medium">Branch Management</h1>
-            <p className="mb-4 ">Welcome back, Business Owner!</p>
-            <div className="grid lg:grid-cols-2 grid-cols-1">
-              <BranchCard
-                name="Downtown Branch"
-                address="123 Barber Street, Downtown"
-                status="active"
-                manager={{
-                  name: 'Downtown Branch Manager',
-                  email: 'manager@gmail.com'
-                }}
-                stats={{
-                  clients: 247,
-                  bookings: 247,
-                  revenue: 247
-                }}
-                onView={() => console.log('View')}
-                onEdit={() => console.log('Edit')}
-                onDelete={() => console.log('Delete')}
-              />
-            </div>
-          </div>
-        )}
+        {activeTab === 'branches' && <Branches branches={branchCards} />}
       </div>
     </div>
   );
